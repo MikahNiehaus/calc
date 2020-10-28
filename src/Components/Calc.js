@@ -1,62 +1,93 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+export default function Calc() {
+    const [num, setNum] = useState(0)
+    const handleOneClick = () => (setNum(addNum(num,1)))
+    const handleTwoClick = () => (setNum(addNum(num,2)))
+    const handleThreeClick = () => setNum(addNum(num,3))
+    const handleFourClick = () => setNum(addNum(num,4))
+    const handleFiveClick = () => setNum(addNum(num,5))
+    const handleSixClick = () => setNum(addNum(num,6))
+    const handleSevenClick = () => setNum(addNum(num,7))
+    const handleEightClick = () => setNum(addNum(num,8))
+    const handleNineClick = () => setNum(addNum(num,9))
+    const handleZeroClick = () => setNum(addNum(num,0))
 
-export default function Calc(props) {
+    const [command, setCommand] = useState("")
+    const [history, setHistory] = useState(null)
+    const handleACClick = () => (setNum(0),setHistory(null),setCommand(""))//, setSavedNum([])
+    const handlePlusClick = () => (equal(),setCommand("+"))
+    const handleMinusClick = () => (equal(),setCommand("-"))
+    const handleEqualClick = () => (equal())
+    useEffect(() => {
+      console.log("end---------------------------------")
+    })
+  
+    function addNum(a,b){
+  console.log("addNum")
+      if(history===num){
+       console.log("setNum",b)
+        return b
+      } else{
+     let x = a.toString() + b.toString()
+      console.log("setNum",parseInt(x))
+     return parseInt(x)
+      }
+    }
 
-    const [num, setNum] = useState(0)
-    const handleOneClick = () => (setNum(addNum(num,1)),console.log(num))
-    const handleTwoClick = () => (setNum(addNum(num,2)),console.log(num))
-    const handleThreeClick = () => setNum(addNum(num,3),console.log(num))
-    const handleFourClick = () => setNum(addNum(num,4))
-    const handleFiveClick = () => setNum(addNum(num,5))
-    const handleSixClick = () => setNum(addNum(num,6))
-    const handleSevenClick = () => setNum(addNum(num,7))
-    const handleEightClick = () => setNum(addNum(num,8))
-    const handleNineClick = () => setNum(addNum(num,9))
-    const handleZeroClick = () => setNum(addNum(num,0))
 
-    const [savedNum, setSavedNum] = useState(0)
-    const [command, setCommand,] = useState('+')
-    const [equalNum, setEqualNum] = useState(null)
-    const handleACClick = () => (setNum(0), setSavedNum(0),setEqualNum(null))
-    const handlePlusClick = () => (setCommand('+'),setSavedNum(Equal()),setEqualNum(null),setNum(0),console.log(savedNum, num))
-    const handleMinusClick = () => (setEqualNum(null),setNum(0),setCommand('-'),setSavedNum(Equal()),console.log(savedNum, num))
-    const handleEqualClick = () => (console.log(savedNum, num),setNum(null),setEqualNum(Equal()),setSavedNum(0),setCommand(''))
+    function equal(){
+       console.log("equal")
+     if (command==="") {
+          setHistory(num);
+          setNum(0)
+          console.log("setNum",0)
+          console.log("setHistory", num)
+     } else {
+       switch (command) {
+                 case '+':
+                  setNum(history + num)
+                  setHistory(history + num);
+                  setCommand("")
+                  console.log("setNum",history + num)
+                  console.log("setHistory",history + num)
+                  console.log("setCommand","")
+                  break;   
+                 case '-':
+                      setNum(history - num)
+          setHistory(history - num);
+          setCommand("")
+          console.log("setNum",history + num)
+          console.log("setHistory",history + num)
+          console.log("setCommand","")
+          break;  
+                 case '/':
+                      setNum(history / num)
+          setHistory(history / num);
+          setCommand("")
+          console.log("setNum",history + num)
+          console.log("setHistory",history + num)
+          console.log("setCommand","")
+          break;  
+                 case '%':
+                   return history % num
+                 case '*':
+                   return history * num
+                 case '=':
+                   setNum(history)
+                  setHistory(null);
+                  console.log("setNum",history + num)
+                  console.log("setHistory",null)
+        
+                  break;
+                 default:
+          
+     }
+  }
+}
+    return (
 
-    useEffect(() => {
-      console.log("hit")
-    })
-
-    function addNum(a,b){
-      if(a===null){
-        setEqualNum(null)
-        return b
-      } else{
-     let x = a.toString() + b.toString()
-     return parseInt(x)
-      }
-    }
-
-    function Equal(){
-      console.log("Equal Function")
-      switch (command) {
-        case '+':
-         return savedNum + num
-        case '-':
-          return savedNum - num
-        case '/':
-          return savedNum / num
-        case '%':
-          return savedNum % num
-        case '*':
-          return savedNum * num
-        default:
-        return 0
-    }
-  }
-
-    return (
       <div>
-       <h1>{num}{equalNum}</h1> 
+       <h1>{num}</h1> 
         <div>
           <button onClick={handleACClick}>AC</button>
           <button onClick={handleEightClick}>+/-</button>
