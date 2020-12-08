@@ -25,23 +25,18 @@ export default function Calc() {
 
     const handleEqualClick = () => (equal())
     useEffect(() => {
-      console.log("end---------------------------------")
     })
   
     function addNum(a,b){
-  console.log("addNum",command)
   let x = 0;
       if(history===num){
-       console.log("setNum",b)
         return b
       } else{
      
       if(command==="." && Number.isInteger(a)){
         x = a.toString() + "." + b.toString()
-        console.log("setNum",x*1,x)
       }else{
         x = a.toString() + b.toString()
-        console.log("setNum",x*1)
       }
      return x*1
       }
@@ -49,59 +44,39 @@ export default function Calc() {
 
 
     function equal(){
-       console.log("equal")
      if (command===""||command===".") {
           setHistory(num);
           setNum(0)
-          console.log("setNum",0)
-          console.log("setHistory", num)
      } else {
        switch (command) {
                  case '+':
                   setNum(history + num)
                   setHistory(history + num);
                   setCommand("")
-                  console.log("setNum",history + num)
-                  console.log("setHistory",history + num)
-                  console.log("setCommand","")
                   break;   
                  case '-':
                       setNum(history - num)
           setHistory(history - num);
           setCommand("")
-          console.log("setNum",history - num)
-          console.log("setHistory",history - num)
-          console.log("setCommand","")
           break;  
                  case '/':
                       setNum(history / num)
           setHistory(history / num);
           setCommand("")
-          console.log("setNum",history / num)
-          console.log("setHistory",history / num)
-          console.log("setCommand","")
           break;  
                  case '%':
            setNum(history % num)
           setHistory(history % num);
           setCommand("")
-          console.log("setNum",history % num)
-          console.log("setHistory",history % num)
-          console.log("setCommand","")
           break;  
                  case '*':
            setNum(history * num)
           setHistory(history * num);
           setCommand("")
-          console.log("setNum",history * num)
-          console.log("setHistory",history * num)
-          console.log("setCommand","")
           break;  
                  case '=':
                    setNum(history)
                   setHistory(null);
-                  console.log("setNum",history + num)
-                  console.log("setHistory",null)
         
                   break;
                  default:
@@ -111,38 +86,38 @@ export default function Calc() {
 }
     return (
 
-      <div>
-       <h1>{num}</h1> 
+      <div data-testid="component-calc">
+       <h1 data-testid="num">{num}</h1> 
         <div>
-          <button onClick={handleACClick}>AC</button>
-          <button onClick={handleNegativeClick}>+/-</button>
-          <button onClick={handleModClick}>%</button>
-          <button onClick={handleDivideClick}>/</button>
+          <button data-testid="AC" onClick={handleACClick}>AC</button>
+          <button data-testid="+/-" onClick={handleNegativeClick}>+/-</button>
+          <button data-testid="%" onClick={handleModClick}>%</button>
+          <button data-testid="/" onClick={handleDivideClick}>/</button>
           </div>
         <div>
           <div>
-          <button onClick={handleSevenClick}>7</button>
-          <button onClick={handleEightClick}>8</button>
-          <button onClick={handleNineClick}>9</button>
-          <button onClick={handleTimesClick}>x</button>
+          <button data-testid="7" onClick={handleSevenClick}>7</button>
+          <button data-testid="8" onClick={handleEightClick}>8</button>
+          <button data-testid="9" onClick={handleNineClick}>9</button>
+          <button data-testid="x" onClick={handleTimesClick}>x</button>
 
           </div>
           <div>
-          <button onClick={handleFourClick}>4</button>
-          <button onClick={handleFiveClick}>5</button>
-          <button onClick={handleSixClick}>6</button>
-          <button onClick={handleMinusClick}>-</button>
+          <button data-testid="4" onClick={handleFourClick}>4</button>
+          <button data-testid="5" onClick={handleFiveClick}>5</button>
+          <button data-testid="6" onClick={handleSixClick}>6</button>
+          <button data-testid="-" onClick={handleMinusClick}>-</button>
           
           </div>
-          <button onClick={handleOneClick}>1</button>
-          <button onClick={handleTwoClick}>2</button>
-          <button onClick={handleThreeClick}>3</button>
-          <button onClick={handlePlusClick}>+</button>
+          <button data-testid="1" onClick={handleOneClick}>1</button>
+          <button data-testid="2" onClick={handleTwoClick}>2</button>
+          <button data-testid="3" onClick={handleThreeClick}>3</button>
+          <button data-testid="+" onClick={handlePlusClick}>+</button>
 
           <div>
-          <button style={{width:"200px"}} onClick={handleZeroClick}>0</button>
-          <button onClick={handlePointClick}>.</button>
-          <button onClick={handleEqualClick}>=</button>
+          <button data-testid="0" style={{width:"200px"}} onClick={handleZeroClick}>0</button>
+          <button data-testid="." onClick={handlePointClick}>.</button>
+          <button data-testid="=" onClick={handleEqualClick}>=</button>
 
           </div>
         </div>
